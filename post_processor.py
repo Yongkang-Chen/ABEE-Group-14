@@ -15,8 +15,8 @@ def plot_1D_results(output_paths, plot_column_name,
 					y_axis_title, plot_title):
 	fig, axs = plt.subplots(1, 1, figsize=(20,10))
 	fontsize = 20
-	for path in output_paths:
-		this_path = 'param_exp_1' +'//'+ 'test_{}'.format(path) +'//' + 'eplusout.csv'
+	for parameter_key in output_paths.keys():
+		this_path = output_paths[parameter_key]
 		this_df = pd.read_csv(this_path)
 		this_df['Date/Time'] = '2002 ' + this_df['Date/Time']
 		this_df['Date/Time'] = this_df['Date/Time'].apply(eplus_to_datetime)
@@ -28,7 +28,7 @@ def plot_1D_results(output_paths, plot_column_name,
 				alpha = 0.7, 
 				linestyle = '--', 
 				linewidth = 2, 
-				label = path)
+				label = parameter_key)
 	datetime_ax_loc = mdates.HourLocator()
 	datetime_ax_fmt = mdates.DateFormatter('%H:%M')
 	axs.xaxis.set_major_locator(datetime_ax_loc)
@@ -43,5 +43,6 @@ def plot_1D_results(output_paths, plot_column_name,
 	axs.set_ylabel('Air Temperature (C)', 
 					fontsize = fontsize)
 	axs.legend(fontsize = fontsize)
+	axs.set_title(plot_title)
 	plt.savefig('param_exp_1/1.png',bbox_inches='tight')
 	facecolor = 'w'

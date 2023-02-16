@@ -38,26 +38,24 @@ def run_one_simulation_helper(eplus_run_path, idf_path, output_dir,
 
 	######### step 6: run simulation #########
 	run_eplus_model(eplus_run_path, idf_path, output_dir)
-	return output_dir
+	return output_dir + '/eplusout.csv'
 
 
 
 def run_one_parameter_parametric(eplus_run_path, idf_path, output_dir,
 								parameter_key, parameter_vals):
 	
-	output_paths = []
+	res_dict = {}
 	if not os.path.isdir(output_dir):
 		os.mkdir(output_dir)
 	for parameter_val in parameter_vals:
-		this_output_dir = output_dir +'//' 'test_{}'.format(parameter_val)
+		this_output_dir = output_dir +f'/{parameter_val}'
 		this_res_path = run_one_simulation_helper(eplus_run_path,idf_path,
 								this_output_dir, parameter_key,
 								parameter_val)
-		output_paths = {index: this_output_dir for (index, this_output_dir) 
-								in enumerate(parameter_vals)}
-		output_paths = dict.fromkeys(parameter_vals, output_dir)
-
-	return output_paths
+		res_dict[parameter_val] = this_res_path
+		
+	return res_dict # TO-DO!
 
 
 
