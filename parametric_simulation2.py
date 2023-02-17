@@ -61,7 +61,7 @@ def run_two_simulation_helper(eplus_run_path, idf_path, output_dir,
                               parameter_key1, parameter_val1,
                               parameter_key2, parameter_val2):
     """
-	This is a helper function to run one simulation with the changed
+	This is a helper function to run two simulation with the changed
 	value of the parameter_key
 	"""
     ######### step 1: convert an IDF file into JSON file #########

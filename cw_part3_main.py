@@ -26,26 +26,26 @@ idf_path = './1ZoneUncontrolled_win_1.idf'
 
 parameter_key_of_window_u = ['WindowMaterial:SimpleGlazingSystem',
                  'SimpleWindow:DOUBLE PANE WINDOW',
-                 'solar_heat_gain_coefficient']
+                 'u_factor']
 
-parameter_vals_of_window_u = [i / 100 for i in range(25, 75, 5)]
+parameter_vals_of_window_u = [i / 100 for i in range(100, 251, 10)]
 
 
 parameter_key_of_window_SHGC = ['WindowMaterial:SimpleGlazingSystem',
                  'SimpleWindow:DOUBLE PANE WINDOW',
-                 'u_factor']
+                 'solar_heat_gain_coefficient']
 
-parameter_vals_of_window_SHGC = [i / 100 for i in range(100, 250, 10)]
+parameter_vals_of_window_SHGC = [i / 100 for i in range(25, 76, 5)]
 
 energy_plus_parameter = EnergyPlusParameter()
 
 # set window_u_parameter and return result
 set_window_u_parameter_result = energy_plus_parameter.set_window_u_key_and_values(
-    parameter_key_of_window_u, parameter_vals_of_window_u, val_range=(0.25, 0.75))
+    parameter_key_of_window_u, parameter_vals_of_window_u, val_range=(1.0, 2.5))
 
 # set window_SHGC_parameter and return result
 set_window_SHGC_parameter_result = energy_plus_parameter.set_window_SHGC_key_and_values(
-    parameter_key_of_window_SHGC, parameter_vals_of_window_SHGC, val_range=(1.0, 2.5))
+    parameter_key_of_window_SHGC, parameter_vals_of_window_SHGC, val_range=(0.25, 0.75))
 
 if set_window_SHGC_parameter_result and set_window_SHGC_parameter_result:
     output_dir = 'param_window'
